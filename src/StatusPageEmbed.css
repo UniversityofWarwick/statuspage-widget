@@ -1,0 +1,170 @@
+.statuspage-embed {
+  position: fixed;
+  box-shadow: 0 20px 32px -8px rgba(9,20,66,0.25);
+  z-index: 9999;
+  height: 25vh;
+  width: 100vw;
+  left: -9999px;
+  right: -9999px;
+  overflow: hidden;
+
+  color: white;
+  background-color: #E67E22;
+  border-radius: 3px;
+
+  display: flex;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  letter-spacing: .6px;
+}
+
+.statuspage-embed--visible,
+.statuspage-embed--visible.statuspage-embed--bl,
+.statuspage-embed--visible.statuspage-embed--br {
+  left: 0;
+  bottom: 0;
+}
+
+.statuspage-embed--visible.statuspage-embed--tl,
+.statuspage-embed--visible.statuspage-embed--tr {
+  left: 0;
+  top: 0;
+}
+
+.statuspage-embed--maintenance {
+  background-color: #3498DB;
+}
+
+@media (min-width: 450px) {
+  .statuspage-embed {
+    height: 160px;
+    width: 320px;
+  }
+
+  .statuspage-embed,
+  .statuspage-embed--bl {
+    left: -9999px;
+    right: auto;
+    bottom: 60px;
+    top: auto;
+  }
+
+  .statuspage-embed--br {
+    right: -9999px;
+    left: auto;
+    bottom: 60px;
+    top: auto;
+  }
+
+  .statuspage-embed--tl {
+    left: -9999px;
+    right: auto;
+    top: 60px;
+    bottom: auto;
+  }
+
+  .statuspage-embed--tr {
+    right: -9999px;
+    left: auto;
+    top: 60px;
+    bottom: auto;
+  }
+
+  .statuspage-embed--visible.statuspage-embed--tl,
+  .statuspage-embed--visible.statuspage-embed--tr {
+    top: 60px;
+  }
+
+  .statuspage-embed--visible.statuspage-embed--bl,
+  .statuspage-embed--visible.statuspage-embed--br {
+    bottom: 60px;
+  }
+
+  .statuspage-embed--visible,
+  .statuspage-embed--visible.statuspage-embed--bl,
+  .statuspage-embed--visible.statuspage-embed--tl {
+    left: 60px;
+    right: auto;
+  }
+
+  .statuspage-embed--visible.statuspage-embed--tr,
+  .statuspage-embed--visible.statuspage-embed--br {
+    right: 60px;
+    left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .statuspage-embed {
+    transition: bottom 1s ease;
+  }
+}
+
+@media (min-width: 450px) and (prefers-reduced-motion: no-preference) {
+  .statuspage-embed {
+    transition: left 1s ease, bottom 1s ease, right 1s ease;
+  }
+}
+
+.statuspage-embed__icon {
+  flex: 0 1 auto;
+  padding: 16px 0 0 16px;
+  text-align: center;
+}
+
+.statuspage-embed__content {
+  flex: 1;
+  padding: 16px 6px 20px 6px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.statuspage-embed__content__title {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: inherit;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+
+  font-size: 14px;
+  letter-spacing: .6px;
+  font-weight: 500;
+}
+
+.statuspage-embed__content__context {
+  margin-top: 7px;
+  margin-bottom: auto;
+  font-size: 12px;
+  letter-spacing: .6px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.statuspage-embed__content__link a {
+  color: inherit;
+  text-decoration-color: inherit;
+}
+
+.statuspage-embed__close {
+  text-align: right;
+  min-width: 12px;
+  flex: 0 1 auto;
+  padding: 16px 16px 0 0;
+}
+
+.statuspage-embed__close__button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 1px 0 2px 0;
+}
