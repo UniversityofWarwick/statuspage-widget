@@ -21,3 +21,18 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# IntelliJ IDE
+/.idea/*
+*.iml
+*.iws
+!/.idea/modules.iml
+!/.idea/modules/*.iml
+!/.idea/modules/**/*.iml
+!/.idea/codeStyles
+!/.idea/codeStyleSettings.xml
+!/.idea/fileTemplates/*
+!/.idea/gradle.xml
+!/.idea/compiler.xml
+!/.idea/encodings.xml
+!/.idea/misc.xml
