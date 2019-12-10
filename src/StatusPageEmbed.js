@@ -185,7 +185,7 @@ class StatusPageEmbed extends Component {
     }
 
     return (
-      <div className={ `StatusPageEmbed StatusPageEmbed--${this.props.position} StatusPageEmbed--${currentStatus.indicator} ${this.state.initialised && currentStatus.indicator !== 'none' && ' StatusPageEmbed--visible'}` }>
+      <div className={ `StatusPageEmbed StatusPageEmbed--${this.props.position} StatusPageEmbed--${currentStatus.indicator} ${status.indicator !== currentStatus.indicator && `StatusPageEmbed--${status.indicator}`} ${this.state.initialised && currentStatus.indicator !== 'none' && ' StatusPageEmbed--visible'}` }>
         <div className="StatusPageEmbed__icon">{ icon }</div>
         <div className="StatusPageEmbed__content">
           <h1 className="StatusPageEmbed__content__title">{status.description}</h1>
