@@ -1,12 +1,20 @@
+import './polyfills';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import StatusPageEmbed from './StatusPageEmbed';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function init() {
+  Array.from(document.querySelectorAll('.statuspage-embed-container')).forEach((element) => {
+    const {apiBase, components, pollInterval, position, testMode} = element.dataset;
+    const componentsArray = components && JSON.parse(components);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+    ReactDOM.render(<StatusPageEmbed apiBase={apiBase} components={componentsArray} pollInterval={pollInterval} position={position} testMode={testMode}/>, element);
+  });
+}
+
+if (document.readyState === 'complete' || document.readyState === 'loaded' || document.readyState === 'interactive') {
+  init();
+} else {
+  document.addEventListener('DOMContentLoaded', init, false);
+}

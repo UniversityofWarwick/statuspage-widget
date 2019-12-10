@@ -1,0 +1,174 @@
+.StatusPageEmbed {
+  position: fixed;
+  box-shadow: 0 20px 32px -8px rgba(9,20,66,0.25);
+  z-index: 9999;
+  height: 25vh;
+  width: 100vw;
+  left: -9999px;
+  right: -9999px;
+  overflow: hidden;
+
+  @media (min-width: 450px) {
+    height: 160px;
+    width: 320px;
+  }
+
+  color: white;
+  background-color: #E67E22;
+  border-radius: 3px;
+
+  &--maintenance {
+    background-color: #3498DB;
+  }
+
+  display: flex;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  letter-spacing: .6px;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: top 1s ease, bottom 1s ease;
+
+    @media (min-width: 450px) {
+      transition: left 1s ease, bottom 1s ease, right 1s ease, top 1s ease;
+    }
+  }
+
+  &--visible {
+    &,
+    &.StatusPageEmbed--bl,
+    &.StatusPageEmbed--br {
+      left: 0;
+      bottom: 0;
+    }
+
+    &.StatusPageEmbed--tl,
+    &.StatusPageEmbed--tr {
+      left: 0;
+      top: 0;
+    }
+  }
+
+  @media (min-width: 450px) {
+    &,
+    &--bl {
+      left: -9999px;
+      right: auto;
+      bottom: 60px;
+      top: auto;
+    }
+
+    &--br {
+      right: -9999px;
+      left: auto;
+      bottom: 60px;
+      top: auto;
+    }
+
+    &--tl {
+      left: -9999px;
+      right: auto;
+      top: 60px;
+      bottom: auto;
+    }
+
+    &--tr {
+      right: -9999px;
+      left: auto;
+      top: 60px;
+      bottom: auto;
+    }
+
+    &--visible {
+      &.StatusPageEmbed--tl,
+      &.StatusPageEmbed--tr {
+        top: 60px;
+      }
+
+      &.StatusPageEmbed--bl,
+      &.StatusPageEmbed--br {
+        bottom: 60px;
+      }
+
+      &,
+      &.StatusPageEmbed--bl,
+      &.StatusPageEmbed--tl {
+        left: 60px;
+        right: auto;
+      }
+
+      &.StatusPageEmbed--tr,
+      &.StatusPageEmbed--br {
+        right: 60px;
+        left: auto;
+      }
+    }
+  }
+
+  &__icon {
+    flex: 0 1 auto;
+    padding: 16px 0 0 16px;
+    text-align: center;
+    color: inherit;
+    font-size: 20px;
+  }
+
+  &__content {
+    flex: 1;
+    padding: 16px 6px 20px 6px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &__title {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      color: inherit;
+
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+
+      font-size: 14px;
+      letter-spacing: .6px;
+      font-weight: 500;
+    }
+
+    &__context {
+      margin-top: 7px;
+      margin-bottom: auto;
+      font-size: 12px;
+      letter-spacing: .6px;
+
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+    }
+
+    &__link a {
+      color: inherit;
+      text-decoration-color: inherit;
+    }
+  }
+
+  &__close {
+    text-align: right;
+    min-width: 12px;
+    flex: 0 1 auto;
+    padding: 16px 16px 0 0;
+
+    &__button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 1px 0 2px 0;
+      color: inherit;
+      font-size: 20px;
+    }
+  }
+}
