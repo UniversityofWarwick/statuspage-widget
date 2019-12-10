@@ -1,4 +1,10 @@
+# StatusPage widget
+
+![Build status](https://github.com/UniversityofWarwick/statuspage-widget/workflows/Build%20and%20Deploy/badge.svg)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+You'll need to pass a `FONTAWESOME_NPM_AUTH_TOKEN` environment variable when running `npm i`.
 
 ## Available Scripts
 
