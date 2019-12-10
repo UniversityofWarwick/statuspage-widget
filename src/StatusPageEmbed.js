@@ -115,7 +115,7 @@ class StatusPageEmbed extends Component {
 
   async fetchFromServer() {
     if (this.props.testMode) {
-      return testModeResponse;
+      return await new Promise(resolve => setTimeout(() => resolve(testModeResponse), 50));
     } else {
       const response = await fetch(`${this.props.apiBase}/v2/summary.json`, {signal: abortController.signal});
       return await response.json();
@@ -257,7 +257,7 @@ class StatusPageEmbed extends Component {
     }
 
     return (
-      <div className={ `StatusPageEmbed StatusPageEmbed--${this.props.position} StatusPageEmbed--${currentStatus.indicator} ${status.indicator !== currentStatus.indicator && `StatusPageEmbed--${status.indicator}`} ${this.state.initialised && currentStatus.indicator !== 'none' && ' StatusPageEmbed--visible'}` }>
+      <div className={ `StatusPageEmbed StatusPageEmbed--${this.props.position} StatusPageEmbed--${currentStatus.indicator} ${status.indicator !== currentStatus.indicator ? `StatusPageEmbed--${status.indicator}` : ''} ${this.state.initialised && currentStatus.indicator !== 'none' && ' StatusPageEmbed--visible'}` }>
         <div className="StatusPageEmbed__icon">{ icon }</div>
         <div className="StatusPageEmbed__content">
           <h1 className="StatusPageEmbed__content__title">{status.description}</h1>
