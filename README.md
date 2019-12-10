@@ -1,6 +1,7 @@
 # StatusPage widget
 
 ![Build status](https://github.com/UniversityofWarwick/statuspage-widget/workflows/Build%20and%20Deploy/badge.svg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d97484f4-6eec-4351-a8b5-bc84332e168d/deploy-status)](https://app.netlify.com/sites/epic-bassi-0cb346/deploys)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -6,10 +6,10 @@ import StatusPageEmbed from './StatusPageEmbed';
 
 function init() {
   Array.from(document.querySelectorAll('.statuspage-embed-container')).forEach((element) => {
-    const {apiBase, components, pollInterval, position} = element.dataset;
+    const {apiBase, components, pollInterval, position, testMode} = element.dataset;
     const componentsArray = components && JSON.parse(components);
 
-    ReactDOM.render(<StatusPageEmbed apiBase={apiBase} components={componentsArray} pollInterval={pollInterval} position={position}/>, element);
+    ReactDOM.render(<StatusPageEmbed apiBase={apiBase} components={componentsArray} pollInterval={pollInterval} position={position} testMode={testMode}/>, element);
   });
 }
 

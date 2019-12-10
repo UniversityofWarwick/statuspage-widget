@@ -1,6 +1,6 @@
 /* eslint-env browser */
-import React, {Component} from 'react';
-import {string, arrayOf, number, oneOf} from 'prop-types';
+import React, { Component } from 'react';
+import { string, arrayOf, number, oneOf, bool } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faInfoCircle, faExclamationTriangle } from '@fortawesome/pro-light-svg-icons';
 
@@ -19,8 +19,61 @@ const initialState = {
     description: 'All Systems Operational'
   },
   incidents: [],
-  unresolvedIncidents: [],
   initialised: false,
+};
+
+const testModeResponse = {
+  page: {
+    id: 'test-mode-page',
+    name: 'Test mode',
+    url: 'https://status.example.com'
+  },
+  components: [
+    {
+      id: 'test-mode-component',
+      name: 'Test mode component',
+      status: 'major_outage',
+      description: null,
+      group: false
+    }
+  ],
+  incidents: [
+    {
+      id: 'test-mode-incident',
+      name: 'Outage: Test mode incident',
+      status: 'investigating',
+      created_at: '2019-12-06T10:32:54.869+00:00',
+      updated_at: '2019-12-09T10:52:38.862+00:00',
+      monitoring_at: null,
+      resolved_at: null,
+      impact: 'minor',
+      shortlink: 'http://status.example.com/test-mode-incident',
+      incident_updates: [
+        {
+          id: 'test-mode-incident-update',
+          status: 'investigating',
+          body: 'This will be shown if an incident or maintenance is posted on your status page.',
+          created_at: '2019-12-06T10:12:21.898+00:00',
+          updated_at: '2019-12-06T10:12:22.448+00:00',
+          display_at: '2019-12-06T10:12:21.898+00:00'
+        }
+      ],
+      components: [
+        {
+          id: 'test-mode-component',
+          name: 'Test mode component',
+          status: 'major_outage',
+          description: null,
+          group: false
+        }
+      ]
+    }
+  ],
+  scheduled_maintenances: [],
+  status: {
+    indicator: 'minor',
+    description: 'Partially Degraded Service'
+  }
 };
 
 // check if we can use localStorage (some users may disable 3rd party cookies)
@@ -38,6 +91,7 @@ class StatusPageEmbed extends Component {
     components: arrayOf(string),
     pollInterval: number,
     position: oneOf(['bl', 'br', 'tl', 'tr']),
+    testMode: bool,
   };
 
   static defaultProps = {
@@ -45,20 +99,32 @@ class StatusPageEmbed extends Component {
     components: [], // all
     pollInterval: 60000, // once a minute
     position: 'bl', // bottom left
+    testMode: false,
   };
 
   state = { ...initialState };
+  _isMounted = false;
 
   componentDidMount() {
+    this._isMounted = true;
+
     // Schedule API polling and call immediately
     this.pollIntervalId = setInterval(() => this.poll(), this.props.pollInterval);
     this.poll();
   }
 
+  async fetchFromServer() {
+    if (this.props.testMode) {
+      return testModeResponse;
+    } else {
+      const response = await fetch(`${this.props.apiBase}/v2/summary.json`, {signal: abortController.signal});
+      return await response.json();
+    }
+  }
+
   async poll() {
     try {
-      const response = await fetch(`${this.props.apiBase}/v2/summary.json`, {signal: abortController.signal});
-      const data = await response.json();
+      const data = await this.fetchFromServer();
 
       // Just return a subset of the data so we don't accidentally rely on something that we haven't set in initialState
 
@@ -126,6 +192,8 @@ class StatusPageEmbed extends Component {
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
+
     this.stopPolling();
   }
 
@@ -140,13 +208,15 @@ class StatusPageEmbed extends Component {
   }
 
   update(newState) {
-    this.setState((state) => ({
-      ...newState,
-      previousState: {
-        status: state.status,
-        incidents: state.incidents
-      }
-    }));
+    if (this._isMounted) {
+      this.setState((state) => ({
+        ...newState,
+        previousState: {
+          status: state.status,
+          incidents: state.incidents
+        }
+      }));
+    }
   }
 
   render() {
@@ -181,6 +251,8 @@ class StatusPageEmbed extends Component {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         context = `${pad(fromDate.getDay())} ${months[fromDate.getMonth()]} ${fromDate.getFullYear()} from ${pad(fromDate.getHours())}:${pad(fromDate.getMinutes())} to ${pad(toDate.getDay())} ${months[toDate.getMonth()]} ${toDate.getFullYear()} ${pad(toDate.getHours())}:${pad(toDate.getMinutes())}`;
+      } else if (incident.incident_updates.length) {
+        context = incident.incident_updates[0].body;
       }
     }
 

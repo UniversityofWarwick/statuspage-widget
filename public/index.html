@@ -398,7 +398,12 @@
         <div class="id7-main-content">
           <noscript>You need to enable JavaScript to run this app.</noscript>
 
-          <p><img src="https://github.com/UniversityofWarwick/statuspage-widget/workflows/Build%20and%20Deploy/badge.svg" alt="Build status"></p>
+          <p>
+            <img src="https://github.com/UniversityofWarwick/statuspage-widget/workflows/Build%20and%20Deploy/badge.svg" alt="Build status">
+            <a href="https://app.netlify.com/sites/epic-bassi-0cb346/deploys">
+              <img src="https://api.netlify.com/api/v1/badges/d97484f4-6eec-4351-a8b5-bc84332e168d/deploy-status" alt="Netlify Status">
+            </a>
+          </p>
 
           <p>You can use the JavaScript and CSS files from this project to embed any current maintenance or incidents
           from a StatusPage instance. You can restrict this down to specific components if you know their ID.</p>
@@ -430,7 +435,7 @@
     </div>
     <div class="id7-right-border"></div>
 
-    <div class="statuspage-embed-container" data-api-base="https://status.warwick.ac.uk/api" data-position="bl"></div>
+    <div class="statuspage-embed-container" data-test-mode="true"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
