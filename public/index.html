@@ -1,462 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>StatusPage embed widget</title>
+<html lang="en-GB" class="no-js"> <!-- class="id7-non-branded" to remove Warwick branding -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bare-bones ID7 layout for docs -->
-    <!-- Lato web font -->
-    <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic&amp;subset=latin,latin-ext"
-          rel="stylesheet" type="text/css">
+  <meta name="theme-color" content="#5b3069">
 
-    <style type="text/css">
-      * {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-      }
+  <title>StatusPage embed widget</title>
 
-      html {
-        font-size: 10px;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
-        font-family: sans-serif;
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-      }
+  <!-- Lato web font -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic&amp;subset=latin,latin-ext"
+        rel="stylesheet" type="text/css">
 
-      body {
-        width: 100%;
-        min-height: 100vh;
-        text-rendering: optimizeLegibility;
-        -webkit-font-feature-settings: "kern","liga";
-        -moz-font-feature-settings: "kern","liga";
-        font-feature-settings: "kern","liga";
-        -webkit-font-variant-ligatures: common-ligatures;
-        -moz-font-variant-ligatures: common-ligatures;
-        font-variant-ligatures: common-ligatures;
-        -webkit-font-kerning: normal;
-        -moz-font-kerning: normal;
-        font-kerning: normal;
-        font-family: Lato,'Helvetica Neue',Helvetica,Arial,sans-serif;
-        font-size: 14px;
-        line-height: 1.6;
-        color: #383838;
-        background-color: transparent;
-        margin: 0;
-      }
+  <!-- ID7 -->
+  <link href="https://unpkg.com/@universityofwarwick/id7@2.5.5/dist/css/id7.css" rel="stylesheet">
 
-      a, a:link, a:visited {
-        color: #5b3069;
-        -webkit-text-decoration-color: #c2d3cf;
-        -moz-text-decoration-color: #c2d3cf;
-        text-decoration-color: #c2d3cf;
-        text-decoration: underline;
-      }
+  <!-- Default styling. You will probably want to replace with your own site.css -->
+  <link href="https://unpkg.com/@universityofwarwick/id7@2.5.5/dist/css/id7-default-theme.css" rel="stylesheet">
 
-      a:active, a:hover {
-        outline: 0;
-      }
-
-      a:hover, a:focus, a:active {
-        color: #54756d;
-        -webkit-text-decoration-color: #54756d;
-        -moz-text-decoration-color: #54756d;
-        text-decoration-color: #54756d;
-        text-decoration: underline;
-      }
-
-      .id7-fixed-width-container {
-        position: relative;
-        z-index: 1;
-        padding-right: 0;
-        padding-left: 0;
-        margin-right: auto;
-        margin-left: auto;
-      }
-
-      .id7-utility-masthead {
-        position: relative;
-        z-index: 40;
-        background-color: #8c6e96;
-      }
-
-      .id7-utility-bar {
-        position: relative;
-        height: 24px;
-        padding-right: 20px;
-        padding-left: 20px;
-        margin-right: auto;
-        margin-left: auto;
-        font-size: 85%;
-        line-height: 24px;
-        text-shadow: 0 -1px 0 rgba(0,0,0,.2);
-        white-space: nowrap;
-      }
-
-      .id7-masthead {
-        padding-right: 20px;
-        padding-left: 20px;
-        margin-right: auto;
-        margin-left: auto;
-        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMCIgeT0iMCIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMTY4MCIgaGVpZ2h0PSIzMDAiIHZpZXdCb3g9IjAsIDAsIDE2ODAsIDMwMCIgc2hhcGUtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iPgoJPGRlZnM+CgkJPGZpbHRlciBpZD0ibWFza2ZpbHRlciI+CgkJCTxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VHcmFwaGljIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiCgkJCQl2YWx1ZXM9IjAgMCAwIDAgMAoJCQkJCQkwIDAgMCAwIDAKCQkJCQkJMCAwIDAgMCAwCgkJCQkJCTAuMjEyNjU2IDAuNzE1MTU4IDAuMDcyMTg2IDAgMCIvPgoJCTwvZmlsdGVyPgoKCQk8ZmlsdGVyIGlkPSJpbnZlcnQiPgoJCQk8ZmVDb2xvck1hdHJpeCBpbj0iU291cmNlR3JhcGhpYyIgdHlwZT0ibWF0cml4IiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiCgkJCQl2YWx1ZXM9Ii0xIDAgMCAwIDEKCQkJCQkJMCAtMSAwIDAgMQoJCQkJCQkwIDAgLTEgMCAxCgkJCQkJCTAgMCAwIDEuMDEgMCIvPgoJCTwvZmlsdGVyPgoKCQk8ZyBpZD0iYWxsLWxvZ28iPgoJCQk8cGF0aCBkPSJtIDQzMCwwIDU3MCwxMDAwIDQyNCwtNzg1IDQyNCw3ODUgNTcwLC0xMDAwIiBpZD0id2luZG93IiBmaWxsPSJibGFjayIgLz4KCgkJCTxwYXRoIGQ9IgoJCQkJbSAwLDExODQuMwoJCQkJNDIuMDk3LDAKCQkJCTEwOC43MzUsMzc5LjMwOAoJCQkJMTAyLjcxNSwtMzQzLjAzOAoJCQkJNTIuMDA3LDAKCQkJCTEwMSwzNDMuMDM4CgkJCQkxMDguNTM4LC0zNzkuMzA4CgkJCQk0Mi4xLDAKCQkJCS0xMjUuNTk4LDQyOC4zCgkJCQktNTAuMTYxLDAKCQkJCS0xMDEuODUxLC0zNDQuODMKCQkJCS0xMDMuODEzLDM0NC44MwoJCQkJLTUwLjE1NiwwCgkJCQktMTI1LjYxMywtNDI4LjMKCQkJCTQyLjA5NywwCgoJCQkJbSA1NzguNjE1LDI3OC4zIDEwMi4xNiwtMjM0Ljc1IDEwMi4xNiwyMzQuNzUgLTIwNC4zMiwwIHoKCQkJCW0gMTIxLjM2LC0yNzguMyAtMzguNDEsMCAtMTkxLjI5LDQyOC4zIDQyLjc0LDAgNDkuNTEsLTExMy43MyAyMzYuNTIsMCA0OS41MSwxMTMuNzMgNDIuNzMsMCAtMTkxLjMxLC00MjguMwoKCQkJCW0gNDA1LjY2LDIyOC44OTggYyA0Ny42NywtOC4xMTcgMTA3LjU5LC0zMy40NDkgMTA3LjU5LC0xMTIuNTM4IDAsLTExMi41NCAtMTEzLjc1LC0xMTYuMzYgLTE0OC40MiwtMTE2LjM2IGwgLTEyMi43MiwwIDAsNDI4LjMgNDAuNjIsMCAwLC0zOTIuMDMgODcuNjEsMCBjIDg2LjA2LDAgMTAyLjA2LDUwLjQ0IDEwMi4wNiw4MC4wOSAwLDI5LjU1IC0xNi42Myw3OS43NjkgLTEwMi4wNiw4MC4wMzggbCAtNDYuNzMsMCAwLDM2LjI5MyA0MS4yMiwwIDExNy40NiwxOTUuNjA5IDQ2LjQ1LDAgLTEyMy4wOCwtMTk5LjQwMgoKCQkJCW0gNTgwLjgxLDE5OS4zMDIgMTI1LjYzLC00MjguMyAtNDIuMTEsMCAtMTA4LjU0LDM3OS4zMDggLTk5LjEsLTM0My4wMzggLTU1LjgyLDAgLTEwMC44MiwzNDMuMDM4IC0xMDguNzIsLTM3OS4zMDggLTQyLjExLDAgMTI1LjY0LDQyOC4zIDUwLjEzLDAgMTAzLjgxLC0zNDQuODMgMTAxLjg4LDM0NC44MyA1MC4xMywwCgoJCQkJbSAxOTQuMzIsMCA0MC44NiwwIDAsLTQyOC4zIC00MC44NiwwIDAsNDI4LjMgegoKCQkJCW0gMzM5LjQ5LC0yNS4zOSBjIC0xMTQuNTMsMCAtMTg1LjcyLC04Mi4yODkgLTE4NS43MiwtMTg4Ljc3IGwgMC4wMiwwIGMgMCwtMTA2LjQ5IDcxLjE3LC0xODkuNzEgMTg1LjcsLTE4OS43MSA0My45NywwIDk4LjQ0LDIwLjU3IDEyOS4zOCw2Ni41NiBsIDMzLjQzLC0yNC44MiBjIC00MS40NiwtNTUuNjcgLTk4LjQzLC03OC4wNSAtMTYyLjgxLC03OC4wNSAtMTMzLjczLDAgLTIyNi41OCw5NS4zMyAtMjI2LjU4LDIyNi4wMiAwLDEzMC43IDkyLjg1LDIyNS4wNzEgMjI2LjU4LDIyNS4wNzEgNjQuMzgsMCAxMjEuMzUsLTIyLjM4MyAxNjIuODEsLTc4LjA2MyBsIC0zMy40MywtMjQuODA4IGMgLTMwLjk0LDQ1Ljk2IC04NS40MSw2Ni41NyAtMTI5LjM4LDY2LjU3CgoJCQkJbSAyMjEuMzUsMjUuMzkgNDAuODU5NCwwIDAsLTQyOC4zMDEgLTQwLjg1OTQsMCAwLDQyOC4zMDEgegoJCQkJbSAyOTIuMTMsMCA1OC44MSwwIC0yMjYuMzEsLTIxNC4xNCAyMTMuOTIsLTIxNC4xNiAtNTYuMzIsMCAtMjE4Ljg3LDIxNC4xNiAyMjguNzcsMjE0LjE0IHoKCQkJCSIgaWQ9ImxvZ290eXBlIiBmaWxsPSJibGFjayIgLz4KCQk8L2c+Cgk8L2RlZnM+CgoJPGcgZmlsdGVyPSJ1cmwoI2ludmVydCkiPgoJCTxnIGZpbHRlcj0idXJsKCNtYXNrZmlsdGVyKSI+CgkJCTxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IndoaXRlIiAvPgoJCQk8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMCkgc2NhbGUoMC4wMzA0ODc4MDQ4NykiPgoJCQkJPHVzZSB4PSIwIiB5PSIwIiB4bGluazpocmVmPSIjYWxsLWxvZ28iIC8+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+Cjwvc3ZnPg==);
-        background-repeat: no-repeat;
-        background-position: 0 0;
-        -webkit-background-size: 1680px 300px;
-        background-size: 1680px 300px;
-      }
-
-      .id7-masthead .id7-masthead-contents {
-        margin-right: -10px;
-        margin-left: -10px;
-      }
-
-      .id7-masthead .id7-logo-column {
-        position: relative;
-        float: left;
-        width: 125px;
-        min-height: 1px;
-        padding-right: 10px;
-        padding-left: 10px;
-      }
-
-      .id7-masthead .id7-logo-row {
-        height: 54px;
-        margin-right: -10px;
-        margin-left: -10px;
-      }
-
-      .id7-masthead .id7-logo a {
-        display: block;
-        width: 100%;
-        height: 54px;
-        text-align: center;
-      }
-
-      .id7-page-header a, .id7-page-header a:link, .id7-page-header a:visited {
-        text-decoration: none;
-      }
-
-      .id7-masthead .id7-logo a img {
-        width: 100%;
-        height: 100%;
-        filter: alpha(opacity=0);
-        opacity: 0;
-      }
-
-      .clearfix:after, .clearfix:before,
-      .id7-fixed-width-container:after, .id7-fixed-width-container:before,
-      .id7-main-content-area>.id7-main-content:after, .id7-main-content-area>.id7-main-content:before,
-      .id7-main-content-area>header:after, .id7-main-content-area>header:before,
-      .id7-masthead .id7-logo-row:after, .id7-masthead .id7-logo-row:before,
-      .id7-masthead .id7-masthead-contents:after, .id7-masthead .id7-masthead-contents:before,
-      .id7-masthead:after, .id7-masthead:before,
-      .id7-utility-bar:after, .id7-utility-bar:before {
-        display: table;
-        content: " ";
-      }
-
-      .clearfix:after,
-      .id7-fixed-width-container:after,
-      .id7-main-content-area>.id7-main-content:after,
-      .id7-main-content-area>header:after,
-      .id7-masthead .id7-logo-row:after,
-      .id7-masthead .id7-masthead-contents:after,
-      .id7-masthead:after,
-      .id7-utility-bar:after {
-        clear: both;
-      }
-
-      .id7-masthead .id7-header-text {
-        position: relative;
-        padding: 0 10px;
-      }
-
-      .id7-masthead .id7-header-text h1 {
-        padding: 12px 0;
-        margin: 0;
-        overflow: hidden;
-        font-size: 20px;
-        line-height: 30px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        -webkit-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
-        color: #383838;
-        font-weight: normal;
-      }
-
-      .id7-masthead .id7-header-text a, .id7-masthead .id7-header-text a:link, .id7-masthead .id7-header-text a:visited {
-        color: #383838;
-      }
-
-      .id7-masthead .id7-header-text a:active, .id7-masthead .id7-header-text a:focus, .id7-masthead .id7-header-text a:hover {
-        text-decoration: underline;
-        color: #050505;
-      }
-
-      .id7-utility-masthead::after {
-        background-color: #333;
-        position: absolute;
-        top: 60px;
-        left: 20px;
-        z-index: -1;
-        width: 105px;
-        height: 18px;
-        content: "";
-      }
-
-      .id7-main-content-area {
-        background: #fff;
-        font-size: 16px;
-        font-weight: 400;
-      }
-
-      .id7-main-content-area>header, .id7-main-content-area>.id7-main-content {
-        padding-right: 20px;
-        padding-left: 20px;
-        margin-right: auto;
-        margin-left: auto;
-      }
-
-      .id7-page-title {
-        margin-top: 20px;
-      }
-
-      .id7-page-title h1 {
-        margin-bottom: 0;
-        color: #333;
-        padding-bottom: 11px;
-        border-bottom: 1px solid #ababab;
-        font-size: 24px;
-        font-weight: normal;
-      }
-
-      .id7-main-content-area>.id7-main-content {
-        padding: 20px;
-      }
-
-      p {
-        margin: 0 0 11px;
-      }
-
-      @media (min-width: 768px) {
-        .id7-fixed-width-container,
-        .id7-main-content-area>header,
-        .id7-main-content-area>.id7-main-content {
-          width: 750px;
-        }
-
-        .id7-masthead {
-          background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMCIgeT0iMCIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMTE3MCIgaGVpZ2h0PSIzMDAiIHZpZXdCb3g9IjAsIDAsIDExNzAsIDMwMCIgc2hhcGUtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iPgoJPGRlZnM+CgkJPGZpbHRlciBpZD0ibWFza2ZpbHRlciI+CgkJCTxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VHcmFwaGljIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiCgkJCQl2YWx1ZXM9IjAgMCAwIDAgMAoJCQkJCQkwIDAgMCAwIDAKCQkJCQkJMCAwIDAgMCAwCgkJCQkJCTAuMjEyNjU2IDAuNzE1MTU4IDAuMDcyMTg2IDAgMCIvPgoJCTwvZmlsdGVyPgoKCQk8ZmlsdGVyIGlkPSJpbnZlcnQiPgoJCQk8ZmVDb2xvck1hdHJpeCBpbj0iU291cmNlR3JhcGhpYyIgdHlwZT0ibWF0cml4IiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiCgkJCQl2YWx1ZXM9Ii0xIDAgMCAwIDEKCQkJCQkJMCAtMSAwIDAgMQoJCQkJCQkwIDAgLTEgMCAxCgkJCQkJCTAgMCAwIDEuMDEgMCIvPgoJCTwvZmlsdGVyPgoKCQk8ZyBpZD0iYWxsLWxvZ28iPgoJCQk8cGF0aCBkPSJtIDQzMCwwIDU3MCwxMDAwIDQyNCwtNzg1IDQyNCw3ODUgNTcwLC0xMDAwIiBpZD0id2luZG93IiBmaWxsPSJibGFjayIgLz4KCgkJCTxwYXRoIGQ9IgoJCQkJbSAwLDExODQuMwoJCQkJNDIuMDk3LDAKCQkJCTEwOC43MzUsMzc5LjMwOAoJCQkJMTAyLjcxNSwtMzQzLjAzOAoJCQkJNTIuMDA3LDAKCQkJCTEwMSwzNDMuMDM4CgkJCQkxMDguNTM4LC0zNzkuMzA4CgkJCQk0Mi4xLDAKCQkJCS0xMjUuNTk4LDQyOC4zCgkJCQktNTAuMTYxLDAKCQkJCS0xMDEuODUxLC0zNDQuODMKCQkJCS0xMDMuODEzLDM0NC44MwoJCQkJLTUwLjE1NiwwCgkJCQktMTI1LjYxMywtNDI4LjMKCQkJCTQyLjA5NywwCgoJCQkJbSA1NzguNjE1LDI3OC4zIDEwMi4xNiwtMjM0Ljc1IDEwMi4xNiwyMzQuNzUgLTIwNC4zMiwwIHoKCQkJCW0gMTIxLjM2LC0yNzguMyAtMzguNDEsMCAtMTkxLjI5LDQyOC4zIDQyLjc0LDAgNDkuNTEsLTExMy43MyAyMzYuNTIsMCA0OS41MSwxMTMuNzMgNDIuNzMsMCAtMTkxLjMxLC00MjguMwoKCQkJCW0gNDA1LjY2LDIyOC44OTggYyA0Ny42NywtOC4xMTcgMTA3LjU5LC0zMy40NDkgMTA3LjU5LC0xMTIuNTM4IDAsLTExMi41NCAtMTEzLjc1LC0xMTYuMzYgLTE0OC40MiwtMTE2LjM2IGwgLTEyMi43MiwwIDAsNDI4LjMgNDAuNjIsMCAwLC0zOTIuMDMgODcuNjEsMCBjIDg2LjA2LDAgMTAyLjA2LDUwLjQ0IDEwMi4wNiw4MC4wOSAwLDI5LjU1IC0xNi42Myw3OS43NjkgLTEwMi4wNiw4MC4wMzggbCAtNDYuNzMsMCAwLDM2LjI5MyA0MS4yMiwwIDExNy40NiwxOTUuNjA5IDQ2LjQ1LDAgLTEyMy4wOCwtMTk5LjQwMgoKCQkJCW0gNTgwLjgxLDE5OS4zMDIgMTI1LjYzLC00MjguMyAtNDIuMTEsMCAtMTA4LjU0LDM3OS4zMDggLTk5LjEsLTM0My4wMzggLTU1LjgyLDAgLTEwMC44MiwzNDMuMDM4IC0xMDguNzIsLTM3OS4zMDggLTQyLjExLDAgMTI1LjY0LDQyOC4zIDUwLjEzLDAgMTAzLjgxLC0zNDQuODMgMTAxLjg4LDM0NC44MyA1MC4xMywwCgoJCQkJbSAxOTQuMzIsMCA0MC44NiwwIDAsLTQyOC4zIC00MC44NiwwIDAsNDI4LjMgegoKCQkJCW0gMzM5LjQ5LC0yNS4zOSBjIC0xMTQuNTMsMCAtMTg1LjcyLC04Mi4yODkgLTE4NS43MiwtMTg4Ljc3IGwgMC4wMiwwIGMgMCwtMTA2LjQ5IDcxLjE3LC0xODkuNzEgMTg1LjcsLTE4OS43MSA0My45NywwIDk4LjQ0LDIwLjU3IDEyOS4zOCw2Ni41NiBsIDMzLjQzLC0yNC44MiBjIC00MS40NiwtNTUuNjcgLTk4LjQzLC03OC4wNSAtMTYyLjgxLC03OC4wNSAtMTMzLjczLDAgLTIyNi41OCw5NS4zMyAtMjI2LjU4LDIyNi4wMiAwLDEzMC43IDkyLjg1LDIyNS4wNzEgMjI2LjU4LDIyNS4wNzEgNjQuMzgsMCAxMjEuMzUsLTIyLjM4MyAxNjIuODEsLTc4LjA2MyBsIC0zMy40MywtMjQuODA4IGMgLTMwLjk0LDQ1Ljk2IC04NS40MSw2Ni41NyAtMTI5LjM4LDY2LjU3CgoJCQkJbSAyMjEuMzUsMjUuMzkgNDAuODU5NCwwIDAsLTQyOC4zMDEgLTQwLjg1OTQsMCAwLDQyOC4zMDEgegoJCQkJbSAyOTIuMTMsMCA1OC44MSwwIC0yMjYuMzEsLTIxNC4xNCAyMTMuOTIsLTIxNC4xNiAtNTYuMzIsMCAtMjE4Ljg3LDIxNC4xNiAyMjguNzcsMjE0LjE0IHoKCQkJCSIgaWQ9ImxvZ290eXBlIiBmaWxsPSJibGFjayIgLz4KCQk8L2c+Cgk8L2RlZnM+CgoJPGcgZmlsdGVyPSJ1cmwoI2ludmVydCkiPgoJCTxnIGZpbHRlcj0idXJsKCNtYXNrZmlsdGVyKSI+CgkJCTxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IndoaXRlIiAvPgoJCQk8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMCkgc2NhbGUoMC4wNDg3ODA0ODc4KSI+CgkJCQk8dXNlIHg9IjAiIHk9IjAiIHhsaW5rOmhyZWY9IiNhbGwtbG9nbyIgLz4KCQkJPC9nPgoJCTwvZz4KCTwvZz4KPC9zdmc+);
-          background-repeat: no-repeat;
-          background-position: 0 0;
-          -webkit-background-size: 1170px 300px;
-          background-size: 1170px 300px;
-        }
-
-        .id7-utility-masthead::after {
-          top: 78px;
-          width: 160px;
-          height: 26px;
-        }
-
-        .id7-masthead .id7-logo-column {
-          margin-bottom: 2px;
-          float: left;
-          width: 66.66666667%;
-        }
-
-        .id7-masthead .id7-logo-row {
-          height: 80px;
-        }
-
-        .id7-masthead .id7-logo-row>.id7-logo {
-          float: left;
-          width: 180px;
-        }
-
-        .id7-masthead .id7-logo a {
-          height: 80px;
-        }
-
-        .id7-masthead .id7-header-text h1 {
-          font-size: 30px;
-        }
-
-        .id7-page-title h1 {
-          font-size: 28px;
-          color: #5b3069;
-        }
-
-        .id7-left-border, .id7-right-border {
-          position: fixed;
-          top: 0;
-          z-index: 0;
-          width: 50%;
-          height: 100%;
-          background-color: #eeeeee;
-        }
-
-        .id7-left-border {
-          left: 0;
-        }
-
-        .id7-right-border {
-          right: 0;
-        }
-      }
-
-      @media (min-width: 992px) {
-        .id7-fixed-width-container,
-        .id7-main-content-area>header,
-        .id7-main-content-area>.id7-main-content {
-          width: 970px;
-        }
-
-        .id7-left-border {
-          -webkit-transform: translate(-485px,0);
-          -ms-transform: translate(-485px,0);
-          -o-transform: translate(-485px,0);
-          transform: translate(-485px,0);
-        }
-
-        .id7-right-border {
-          -webkit-transform: translate(485px,0);
-          -ms-transform: translate(485px,0);
-          -o-transform: translate(485px,0);
-          transform: translate(485px,0);
-        }
-      }
-
-      @media (min-width: 1200px) {
-        .id7-fixed-width-container,
-        .id7-main-content-area>header,
-        .id7-main-content-area>.id7-main-content {
-          width: 1170px;
-        }
-
-        .id7-left-border {
-          -webkit-transform: translate(-585px,0);
-          -ms-transform: translate(-585px,0);
-          -o-transform: translate(-585px,0);
-          transform: translate(-585px,0);
-        }
-
-        .id7-right-border {
-          -webkit-transform: translate(585px, 0);
-          -ms-transform: translate(585px, 0);
-          -o-transform: translate(585px, 0);
-          transform: translate(585px, 0);
-        }
-      }
-
-      @media (min-width: 1921px), (min-height: 1201px) {
-        .id7-left-border, .id7-right-border {
-          background-size: cover;
-        }
-      }
-      
-      .netlify-status {
-        margin-left: 0.5em; 
-      }
-    </style>
-  </head>
-  <body>
-    <div class="id7-left-border"></div>
-    <div class="id7-fixed-width-container">
-      <header class="id7-page-header">
-        <div class="id7-utility-masthead">
-          <nav class="id7-utility-bar"></nav>
-          <div class="id7-masthead">
-            <div class="id7-masthead-contents">
-              <div class="clearfix">
-                <div class="id7-logo-column">
-                  <div class="id7-logo-row">
-                    <div class="id7-logo">
-                      <a href="http://warwick.ac.uk" title="Warwick homepage">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Warwick">
-                      </a>
-                    </div>
+  <script src="https://unpkg.com/@universityofwarwick/id7@2.5.5/dist/js/id7-bundle.js"></script>
+</head>
+<body>
+  <div class="id7-left-border"></div>
+  <div class="id7-fixed-width-container">
+    <header class="id7-page-header">
+      <div class="id7-utility-masthead">
+        <nav class="id7-utility-bar"></nav>
+        <div class="id7-masthead">
+          <div class="id7-masthead-contents">
+            <div class="clearfix">
+              <div class="id7-logo-column">
+                <div class="id7-logo-row">
+                  <div class="id7-logo">
+                    <a href="http://warwick.ac.uk" title="Warwick homepage">
+                      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Warwick">
+                    </a>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div class="id7-header-text clearfix">
-                <h1>
-                  <span class="id7-current-site-link">University of Warwick</span>
-                </h1>
-              </div>
+            <div class="id7-header-text clearfix">
+              <h1>
+                <span class="id7-current-site-link">University of Warwick</span>
+              </h1>
             </div>
           </div>
         </div>
+      </div>
+    </header>
+
+    <main class="id7-main-content-area" id="main">
+      <header class="id7-main-content-header">
+        <div class="id7-page-title">
+          <h1>StatusPage embed widget</h1>
+        </div>
       </header>
 
-      <main class="id7-main-content-area" id="main">
-        <header class="id7-main-content-header">
-          <div class="id7-page-title">
-            <h1>StatusPage embed widget</h1>
-          </div>
-        </header>
+      <div class="id7-main-content">
+        <noscript>You need to enable JavaScript to run this app.</noscript>
 
-        <div class="id7-main-content">
-          <noscript>You need to enable JavaScript to run this app.</noscript>
+        <p>
+          <a href="https://github.com/UniversityofWarwick/statuspage-widget/actions"><img src="https://github.com/UniversityofWarwick/statuspage-widget/workflows/Build%20and%20Deploy/badge.svg" alt="Build status"></a>&#x20;
+          <a href="https://app.netlify.com/sites/epic-bassi-0cb346/deploys"><img src="https://api.netlify.com/api/v1/badges/d97484f4-6eec-4351-a8b5-bc84332e168d/deploy-status" alt="Netlify Status" class="netlify-status"></a>
+        </p>
 
-          <p>
-            <a href="https://github.com/UniversityofWarwick/statuspage-widget/actions"><img src="https://github.com/UniversityofWarwick/statuspage-widget/workflows/Build%20and%20Deploy/badge.svg" alt="Build status"></a>
-            <a href="https://app.netlify.com/sites/epic-bassi-0cb346/deploys"><img src="https://api.netlify.com/api/v1/badges/d97484f4-6eec-4351-a8b5-bc84332e168d/deploy-status" alt="Netlify Status" class="netlify-status"></a>
-          </p>
+        <p>
+          <a href="https://www.netlify.com">
+            <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify">
+          </a>
+        </p>
 
-          <p>
-            <a href="https://www.netlify.com">
-              <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify">
-            </a>
-          </p>
+        <p>You can use the JavaScript and CSS files from this project to embed any current maintenance or incidents
+        from a StatusPage instance. You can restrict this down to specific components if you know their ID.</p>
 
-          <p>You can use the JavaScript and CSS files from this project to embed any current maintenance or incidents
-          from a StatusPage instance. You can restrict this down to specific components if you know their ID.</p>
+        <p>The JavaScript file hooks into any HTML element with the class of <code>statuspage-embed-container</code>
+          so it can be loaded asynchronously or placed at the end of the <code>&lt;/body&gt;</code>.</p>
 
-          <p>The JavaScript file hooks into any HTML element with the class of <code>statuspage-embed-container</code>
-            so it can be loaded asynchronously or placed at the end of the <code>&lt;/body&gt;</code>.</p>
+        <h2>Examples</h2>
 
-          <h2>Examples</h2>
+        <p>Full University of Warwick StatusPage embed:</p>
 
-          <p>Full University of Warwick StatusPage embed:</p>
+        <pre><code>&lt;div class="statuspage-embed-container" data-api-base="https://status.warwick.ac.uk/api">&lt;/div></code></pre>
 
-          <pre><code>&lt;div class="statuspage-embed-container" data-api-base="https://status.warwick.ac.uk/api">&lt;/div></code></pre>
+        <p>Restricting to just a few components:</p>
 
-          <p>Restricting to just a few components:</p>
+        <pre><code>&lt;div class="statuspage-embed-container" data-api-base="https://status.warwick.ac.uk/api"
+   data-components="[&amp;quot;g8s8knp0fqrs&amp;quot;,&amp;quot;lvy1tzdrjqfd&amp;quot;,&amp;quot;nf4ymvwshxj1&amp;quot;]">&lt;/div></code></pre>
 
-          <pre><code>&lt;div class="statuspage-embed-container" data-api-base="https://status.warwick.ac.uk/api"
-     data-components="[&amp;quot;g8s8knp0fqrs&amp;quot;,&amp;quot;lvy1tzdrjqfd&amp;quot;,&amp;quot;nf4ymvwshxj1&amp;quot;]">&lt;/div></code></pre>
+        <h2>Data attributes</h2>
 
-          <h2>Data attributes</h2>
+        <ul>
+          <li><code>data-api-base</code> - the fully qualified base URI, e.g. <code>https://status.warwick.ac.uk/api</code></li>
+          <li><code>data-components</code> - a JSON array of component IDs - see /api/v2/components.json for a list of component IDs</li>
+          <li><code>data-poll-interval</code> - how often (in milliseconds) the current summary status should be polled. Defaults to <code>60000</code> (i.e. 1 minute)</li>
+          <li><code>data-position</code> - where the widget should be positioned when displayed, <code>bl</code>, <code>br</code>, <code>tl</code>, or <code>tr</code>. Defaults to <code>bl</code> (bottom left). Note that on mobile, <code>bl</code> and <code>br</code> are treated as bottom and <code>tl</code> and <code>tr</code> as top.</li>
+        </ul>
 
-          <ul>
-            <li><code>data-api-base</code> - the fully qualified base URI, e.g. <code>https://status.warwick.ac.uk/api</code></li>
-            <li><code>data-components</code> - a JSON array of component IDs - see /api/v2/components.json for a list of component IDs</li>
-            <li><code>data-poll-interval</code> - how often (in milliseconds) the current summary status should be polled. Defaults to <code>60000</code> (i.e. 1 minute)</li>
-            <li><code>data-position</code> - where the widget should be positioned when displayed, <code>bl</code>, <code>br</code>, <code>tl</code>, or <code>tr</code>. Defaults to <code>bl</code> (bottom left). Note that on mobile, <code>bl</code> and <code>br</code> are treated as bottom and <code>tl</code> and <code>tr</code> as top.</li>
-          </ul>
-          
-          <h2>Source code and license</h2>
-          
-          <p>The widget is <a href="https://github.com/UniversityofWarwick/statuspage-widget/blob/develop/LICENSE">licensed under the ISC license</a>. Source code is available on <a href="https://github.com/UniversityofWarwick/statuspage-widget">GitHub</a>.
-        </div>
-      </main>
-    </div>
-    <div class="id7-right-border"></div>
+        <h2>Source code and license</h2>
 
-    <div class="statuspage-embed-container" data-test-mode="true"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+        <p>The widget is <a href="https://github.com/UniversityofWarwick/statuspage-widget/blob/develop/LICENSE">licensed under the ISC license</a>. Source code is available on <a href="https://github.com/UniversityofWarwick/statuspage-widget">GitHub</a>.
+      </div>
+    </main>
+  </div>
+  <div class="id7-right-border"></div>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <div class="statuspage-embed-container" data-test-mode="true"></div>
+  <!--
+    This HTML file is a template.
+    If you open it directly in the browser, you will see an empty page.
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+    You can add webfonts, meta tags, or analytics to this file.
+    The build step will place the bundled scripts into the <body> tag.
+
+    To begin the development, run `npm start` or `yarn start`.
+    To create a production bundle, use `npm run build` or `yarn build`.
+  -->
+</body>
 </html>
