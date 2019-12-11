@@ -127,9 +127,9 @@ class StatusPageEmbed extends Component {
       const data = await this.fetchFromServer();
 
       // Just return a subset of the data so we don't accidentally rely on something that we haven't set in initialState
-
       // Filter based on component if necessary
       const dismissedIncidents = localStorageAvailable ? JSON.parse(localStorage.getItem(`statuspage_dismissed_${new URL(this.props.apiBase).hostname}`)) : [];
+
       const filterIncidents = (incident) => {
         if ((dismissedIncidents || []).includes(incident.id)) {
           return false;
