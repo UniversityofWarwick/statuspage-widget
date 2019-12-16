@@ -5,3 +5,18 @@
     public,
     max-age=31536000,
     immutable'''
+    content-security-policy = '''
+    default-src 'none',
+    img-src 'self' data:,
+    style-src 'self' https://fonts.googleapis.com 'report-sample',
+    font-src 'self' data: https://fonts.gstatic.com,
+    script-src 'self' 'report-sample',
+    connect-src 'https://status.warwick.ac.uk',
+    frame-src 'none',
+    object-src 'none',
+    form-action 'none',
+    frame-ancestors 'none',
+    report-uri https://warwick.report-uri.com/r/d/csp/enforce,
+    report-to csp
+    '''
+    report-to = '{"url":"https://warwick.report-uri.com/r/d/csp/enforce","group":"csp","max-age":31557600}'
