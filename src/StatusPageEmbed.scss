@@ -1,4 +1,6 @@
 .StatusPageEmbed {
+  @import "~@fortawesome/fontawesome-svg-core/styles";
+
   position: fixed;
   box-shadow: 0 20px 32px -8px rgba(9,20,66,0.25);
   z-index: 9999;
