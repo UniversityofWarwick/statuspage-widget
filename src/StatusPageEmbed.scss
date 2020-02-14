@@ -153,8 +153,10 @@
     }
 
     &__link a {
-      color: inherit;
-      text-decoration-color: inherit;
+      &, &:link, &:visited {
+        color: inherit;
+        text-decoration-color: inherit;
+      }
     }
   }
 
