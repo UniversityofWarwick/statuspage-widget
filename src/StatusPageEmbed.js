@@ -11,6 +11,7 @@ import {fetch as fetchPolyfill} from 'whatwg-fetch';
 import './StatusPageEmbed.scss';
 
 FontAwesomeConfig.autoAddCss = false;
+FontAwesomeConfig.autoA11y = true;
 
 // use native browser implementation if it supports aborting
 const fetch = ('signal' in new Request('')) ? window.fetch : fetchPolyfill;
@@ -272,7 +273,7 @@ class StatusPageEmbed extends Component {
           ) }
         </div>
         <div className="StatusPageEmbed__close">
-          <button className="StatusPageEmbed__close__button" onClick={() => this.dismiss()}>
+          <button className="StatusPageEmbed__close__button" aria-label="Close" onClick={() => this.dismiss()}>
             <FontAwesomeIcon icon={faTimes} />
           </button>
         </div>
