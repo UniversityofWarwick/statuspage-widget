@@ -121,8 +121,28 @@ class StatusPageEmbed extends Component {
     if (this.props.testMode) {
       return await new Promise(resolve => setTimeout(() => resolve(testModeResponse), 50));
     } else {
-      const response = await fetch(`${this.props.apiBase}/v2/summary.json`, {signal: abortController.signal});
-      return await response.json();
+      try {
+        const response = await fetch(`${this.props.apiBase}/v2/summary.json`, {signal: abortController.signal});
+        return await response.json();
+      } catch (e) {
+        if (window.console && console.log) {
+          console.log('Failed to fetch current system status from statuspage', e);
+        }
+
+        return {
+          page: {
+            // This won't be used to link out anyway
+            url: this.props.apiBase
+          },
+          components: [],
+          incidents: [],
+          scheduled_maintenances: [],
+          status: {
+            indicator: 'none',
+            description: 'All Systems Operational'
+          }
+        };
+      }
     }
   }
 
