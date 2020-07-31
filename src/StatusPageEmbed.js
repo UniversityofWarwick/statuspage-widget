@@ -121,8 +121,28 @@ class StatusPageEmbed extends Component {
     if (this.props.testMode) {
       return await new Promise(resolve => setTimeout(() => resolve(testModeResponse), 50));
     } else {
-      const response = await fetch(`${this.props.apiBase}/v2/summary.json`, {signal: abortController.signal});
-      return await response.json();
+      try {
+        const response = await fetch(`${this.props.apiBase}/v2/summary.json`, {signal: abortController.signal});
+        return await response.json();
+      } catch (e) {
+        if (window.console && console.log) {
+          console.log('Failed to fetch current system status from statuspage', e);
+        }
+
+        return {
+          page: {
+            // This won't be used to link out anyway
+            url: this.props.apiBase
+          },
+          components: [],
+          incidents: [],
+          scheduled_maintenances: [],
+          status: {
+            indicator: 'none',
+            description: 'All Systems Operational'
+          }
+        };
+      }
     }
   }
 
@@ -254,7 +274,7 @@ class StatusPageEmbed extends Component {
         const pad = (i) => i < 10 ? `0${i}` : i.toString();
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-        context = `${pad(fromDate.getDay())} ${months[fromDate.getMonth()]} ${fromDate.getFullYear()} from ${pad(fromDate.getHours())}:${pad(fromDate.getMinutes())} to ${pad(toDate.getDay())} ${months[toDate.getMonth()]} ${toDate.getFullYear()} ${pad(toDate.getHours())}:${pad(toDate.getMinutes())}`;
+        context = `${pad(fromDate.getDate())} ${months[fromDate.getMonth()]} ${fromDate.getFullYear()} from ${pad(fromDate.getHours())}:${pad(fromDate.getMinutes())} to ${pad(toDate.getDate())} ${months[toDate.getMonth()]} ${toDate.getFullYear()} ${pad(toDate.getHours())}:${pad(toDate.getMinutes())}`;
       } else if (incident.incident_updates.length) {
         context = incident.incident_updates[0].body;
       }
