@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "node ./scripts/build-non-split.js",
     "test": "react-scripts test",
-    "dist": "node ./scripts/build-dist.js"
+    "dist": "node ./scripts/build-dist.js",
+    "prepublishOnly": "rm -rf build/ dist/ && npm run build && npm run dist"
   },
   "eslintConfig": {
     "extends": "react-app"
