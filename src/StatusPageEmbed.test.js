@@ -16,3 +16,17 @@ test('renders test mode incident', async () => {
     expect(titleElement).toBeVisible();
   });
 });
+
+test('close button is tabindex -1 when not visible', () => {
+  const renderedElement = render(<StatusPageEmbed />);
+  const closeButton = renderedElement.baseElement.querySelector('.StatusPageEmbed__close__button');
+  expect(closeButton).toHaveAttribute("tabindex", "-1");
+});
+
+test ('close button is tabindex 0 when visible', async () => {
+  const renderedElement = render(<StatusPageEmbed testMode={true} />);
+  await wait(() => {
+    const closeButton = renderedElement.baseElement.querySelector('.StatusPageEmbed__close__button');
+    expect(closeButton).toHaveAttribute("tabindex", "0");
+  });
+});
