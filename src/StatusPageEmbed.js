@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faInfoCircle, faExclamationTriangle } from '@fortawesome/pro-light-svg-icons';
 
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
-import {fetch as fetchPolyfill} from 'whatwg-fetch';
+import { fetch as fetchPolyfill } from 'whatwg-fetch';
 
 import './StatusPageEmbed.scss';
 
