@@ -8,13 +8,13 @@
 A StatusPage widget that supports restricting by component. If you don't need to restrict by component
 then you may wish to just use [@statuspage/status-widget](https://www.npmjs.com/package/@statuspage/status-widget).
 
-You'll need to pass a `FONTAWESOME_NPM_AUTH_TOKEN` environment variable when running `npm i`.
-
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
+
+NOTE: Currently broken since the move to Preact, needs looking at.
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -29,3 +29,16 @@ Launches the test runner in the interactive watch mode.
 ### `npm run build`
 
 Builds the app for production to the `build` folder. This is what Netlify runs when it deploys the assets.
+
+### `npm run dist`
+
+Builds the app for distribution to the `dist` folder.  This is run on prepublish for npm.
+
+## Analysing bundle size
+
+You can analyse the webpack bundle size by running the following:
+
+```shell
+npm run dist -- --stats
+npx webpack-bundle-analyzer dist/bundle-stats.json
+```

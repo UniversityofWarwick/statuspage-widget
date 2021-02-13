@@ -11,15 +11,15 @@
 
   <!-- Lato web font -->
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic&amp;subset=latin,latin-ext"
-        rel="stylesheet" type="text/css">
+        rel="stylesheet" type="text/css" crossorigin="anonymous">
 
   <!-- ID7 -->
-  <link href="https://unpkg.com/@universityofwarwick/id7@2.5.5/dist/css/id7.css" rel="stylesheet">
+  <link href="https://unpkg.com/@universityofwarwick/id7@2.8.3/dist/css/id7.css" rel="stylesheet" type="text/css" crossorigin="anonymous">
 
   <!-- Default styling. You will probably want to replace with your own site.css -->
-  <link href="https://unpkg.com/@universityofwarwick/id7@2.5.5/dist/css/id7-default-theme.css" rel="stylesheet">
+  <link href="https://unpkg.com/@universityofwarwick/id7@2.8.3/dist/css/id7-default-theme.css" rel="stylesheet" type="text/css" crossorigin="anonymous">
 
-  <script src="https://unpkg.com/@universityofwarwick/id7@2.5.5/dist/js/id7-bundle.js"></script>
+  <script src="https://unpkg.com/@universityofwarwick/id7@2.8.3/dist/js/id7-bundle.js" type="text/javascript" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="id7-left-border"></div>
@@ -96,6 +96,7 @@
           <li><code>data-components</code> - a JSON array of component IDs - see /api/v2/components.json for a list of component IDs</li>
           <li><code>data-poll-interval</code> - how often (in milliseconds) the current summary status should be polled. Defaults to <code>60000</code> (i.e. 1 minute)</li>
           <li><code>data-position</code> - where the widget should be positioned when displayed, <code>bl</code>, <code>br</code>, <code>tl</code>, or <code>tr</code>. Defaults to <code>bl</code> (bottom left). Note that on mobile, <code>bl</code> and <code>br</code> are treated as bottom and <code>tl</code> and <code>tr</code> as top.</li>
+          <li><code>data-font-awesome-variant</code> - which variant of FontAwesome icons should be used, <code>fas</code> (solid), <code>far</code> (regular), <code>fal</code> (light), or <code>fad</code> (duotone). Defaults to <code>fas</code> (solid) - note that any other option requires a Pro subscription to FontAwesome.</li>
         </ul>
 
         <h2>Content Security Policy</h2>
