@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, wait } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/preact';
 import StatusPageEmbed from './StatusPageEmbed';
 
 test('renders default hidden embed', () => {
@@ -10,7 +10,7 @@ test('renders default hidden embed', () => {
 
 test('renders test mode incident', async () => {
   const { getByText } = render(<StatusPageEmbed testMode={true} />);
-  await wait(() => {
+  await waitFor(() => {
     const titleElement = getByText(/outage: test mode incident/i);
     expect(titleElement).toBeInTheDocument();
     expect(titleElement).toBeVisible();
@@ -25,7 +25,7 @@ test('close button is tabindex -1 when not visible', () => {
 
 test ('close button is tabindex 0 when visible', async () => {
   const renderedElement = render(<StatusPageEmbed testMode={true} />);
-  await wait(() => {
+  await waitFor(() => {
     const closeButton = renderedElement.baseElement.querySelector('.StatusPageEmbed__close__button');
     expect(closeButton).toHaveAttribute("tabindex", "0");
   });
