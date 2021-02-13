@@ -1,5 +1,3 @@
-import './polyfills';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import StatusPageEmbed from './StatusPageEmbed';

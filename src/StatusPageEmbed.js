@@ -1,20 +1,8 @@
 /* eslint-env browser */
 import React, { Component } from 'react';
 import { string, arrayOf, number, oneOf, bool } from 'prop-types';
-import { config as FontAwesomeConfig } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faInfoCircle, faExclamationTriangle } from '@fortawesome/pro-light-svg-icons';
-
-import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
-import { fetch as fetchPolyfill } from 'whatwg-fetch';
 
 import './StatusPageEmbed.scss';
-
-FontAwesomeConfig.autoAddCss = false;
-FontAwesomeConfig.autoA11y = true;
-
-// use native browser implementation if it supports aborting
-const fetch = ('signal' in new Request('')) ? window.fetch : fetchPolyfill;
 
 const abortController = new AbortController();
 const initialState = {
@@ -96,6 +84,7 @@ class StatusPageEmbed extends Component {
     pollInterval: number,
     position: oneOf(['bl', 'br', 'tl', 'tr']),
     testMode: bool,
+    fontAwesomeVariant: oneOf(['fas', 'far', 'fal', 'fad']),
   };
 
   static defaultProps = {
@@ -104,6 +93,7 @@ class StatusPageEmbed extends Component {
     pollInterval: 60000, // once a minute
     position: 'bl', // bottom left
     testMode: false,
+    fontAwesomeVariant: 'fas',
   };
 
   state = { ...initialState };
@@ -256,9 +246,9 @@ class StatusPageEmbed extends Component {
 
     let icon;
     if (status.indicator === 'maintenance') {
-      icon = (<FontAwesomeIcon icon={faInfoCircle} />);
+      icon = (<i className={ `${this.props.fontAwesomeVariant} fa-info-circle` } aria-hidden="true" />);
     } else if (status.indicator !== 'none') {
-      icon = (<FontAwesomeIcon icon={faExclamationTriangle} />);
+      icon = (<i className={ `${this.props.fontAwesomeVariant} fa-exclamation-triangle` } aria-hidden="true" />);
     }
 
     let context;
@@ -294,7 +284,7 @@ class StatusPageEmbed extends Component {
         </div>
         <div className="StatusPageEmbed__close">
           <button className="StatusPageEmbed__close__button" aria-label="Close" onClick={() => this.dismiss()} tabIndex={(this.state.initialised && currentStatus.indicator !== 'none') ? 0 : -1}>
-            <FontAwesomeIcon icon={faTimes} />
+            <i className={ `${this.props.fontAwesomeVariant} fa-times` } aria-hidden="true" />
           </button>
         </div>
       </div>

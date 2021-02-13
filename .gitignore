@@ -10,6 +10,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -36,8 +37,3 @@ yarn-error.log*
 !/.idea/compiler.xml
 !/.idea/encodings.xml
 !/.idea/misc.xml
-
-# Ignore dist files except the ones we want to distribute
-/dist
-!/dist/main.css*
-!/dist/main.js*
