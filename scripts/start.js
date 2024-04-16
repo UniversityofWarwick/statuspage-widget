@@ -97,15 +97,6 @@ checkBrowsers(paths.appPath, isInteractive)
 
     const config = configFactory('development');
 
-    // Alias react to preact
-    config.resolve = config.resolve || {};
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-      "react": "preact/compat",
-      "react-dom/test-utils": "preact/test-utils",
-      "react-dom": "preact/compat",
-    };
-
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
     const appName = require(paths.appPackageJson).name;
 
