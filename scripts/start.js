@@ -21,15 +21,6 @@ process.on('unhandledRejection', err => {
 
 // Ensure environment variables are read.
 require('react-scripts/config/env');
-// @remove-on-eject-begin
-// Do the preflight check (only happens before eject).
-const verifyPackageTree = require('react-scripts/scripts/utils/verifyPackageTree');
-if (process.env.SKIP_PREFLIGHT_CHECK !== 'true') {
-  verifyPackageTree();
-}
-const verifyTypeScriptSetup = require('react-scripts/scripts/utils/verifyTypeScriptSetup');
-verifyTypeScriptSetup();
-// @remove-on-eject-end
 
 const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');

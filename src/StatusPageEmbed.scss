@@ -1,38 +1,42 @@
 .StatusPageEmbed {
-  position: fixed;
-  box-shadow: 0 20px 32px -8px rgba(9,20,66,0.25);
-  z-index: 9999;
-  height: 25vh;
-  width: 100vw;
-  left: -9999px;
-  right: -9999px;
-  overflow: hidden;
+  & {
+    position: fixed;
+    box-shadow: 0 20px 32px -8px rgba(9,20,66,0.25);
+    z-index: 9999;
+    height: 25vh;
+    width: 100vw;
+    left: -9999px;
+    right: -9999px;
+    overflow: hidden;
 
-  @media (min-width: 450px) {
-    height: 160px;
-    width: 320px;
-  }
-
-  color: white;
-  background-color: #E67E22;
-  border-radius: 3px;
-
-  &--maintenance {
-    background-color: #3498DB;
-  }
-
-  display: flex;
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 14px;
-  letter-spacing: .6px;
-
-  @media (prefers-reduced-motion: no-preference) {
-    transition: top 1s ease, bottom 1s ease;
+    color: white;
+    background-color: #440379;
+    border-radius: 3px;
 
     @media (min-width: 450px) {
-      transition: left 1s ease, bottom 1s ease, right 1s ease, top 1s ease;
+      height: 160px;
+      width: 320px;
+    }
+  }
+
+  &--maintenance {
+    background-color: #003354;
+  }
+
+  & { 
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    letter-spacing: .6px;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: top 1s ease, bottom 1s ease;
+
+      @media (min-width: 450px) {
+        transition: left 1s ease, bottom 1s ease, right 1s ease, top 1s ease;
+      }
     }
   }
 

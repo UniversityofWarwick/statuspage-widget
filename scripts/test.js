@@ -22,15 +22,6 @@ process.on('unhandledRejection', err => {
 
 // Ensure environment variables are read.
 require('react-scripts/config/env');
-// @remove-on-eject-begin
-// Do the preflight check (only happens before eject).
-const verifyPackageTree = require('react-scripts/scripts/utils/verifyPackageTree');
-if (process.env.SKIP_PREFLIGHT_CHECK !== 'true') {
-  verifyPackageTree();
-}
-const verifyTypeScriptSetup = require('react-scripts/scripts/utils/verifyTypeScriptSetup');
-verifyTypeScriptSetup();
-// @remove-on-eject-end
 
 const jest = require('jest');
 const execSync = require('child_process').execSync;
@@ -83,6 +74,8 @@ jestConfig.moduleNameMapper = {
   "^react$": "preact/compat",
   "^react-dom/test-utils$": "preact/test-utils",
   "^react-dom$": "preact/compat",
+  "^react/jsx-runtime": "preact/jsx-runtime",
+  "^react/jsx-dev-runtime": "preact/jsx-runtime",
 };
 
 argv.push(
