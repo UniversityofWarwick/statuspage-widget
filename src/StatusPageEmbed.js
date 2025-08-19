@@ -270,6 +270,8 @@ class StatusPageEmbed extends Component {
       }
     }
 
+    const tabIndex = (this.state.initialised && currentStatus.indicator !== 'none') ? 0 : -1;
+
     return (
       <div className={ `StatusPageEmbed StatusPageEmbed--${this.props.position} StatusPageEmbed--${currentStatus.indicator} ${status.indicator !== currentStatus.indicator ? `StatusPageEmbed--${status.indicator}` : ''} ${(this.state.initialised && currentStatus.indicator !== 'none') ? ' StatusPageEmbed--visible' : ''}` }>
         <div className="StatusPageEmbed__icon">{ icon }</div>
@@ -278,12 +280,12 @@ class StatusPageEmbed extends Component {
           <div className="StatusPageEmbed__content__context">{ context }</div>
           { status.url && (
             <div className="StatusPageEmbed__content__link">
-              <a href={ status.url } target="_blank" rel="noopener noreferrer">View latest updates</a>
+              <a href={ status.url } tabIndex={tabIndex} target="_blank" rel="noopener noreferrer">View latest updates</a>
             </div>
           ) }
         </div>
         <div className="StatusPageEmbed__close">
-          <button className="StatusPageEmbed__close__button" aria-label="Close" onClick={() => this.dismiss()} tabIndex={(this.state.initialised && currentStatus.indicator !== 'none') ? 0 : -1}>
+          <button className="StatusPageEmbed__close__button" aria-label="Close" onClick={() => this.dismiss()} tabIndex={tabIndex}>
             <i className={ `${this.props.fontAwesomeVariant} fa-times` } aria-hidden="true" />
           </button>
         </div>
