@@ -1,6 +1,6 @@
 # StatusPage widget
 
-[![Build status](https://github.com/UniversityofWarwick/statuspage-widget/workflows/Build%20and%20Deploy/badge.svg)](https://github.com/UniversityofWarwick/statuspage-widget/actions)
+[![Build status](https://github.com/UniversityofWarwick/statuspage-widget/workflows/Build%20and%20Deploy/badge.svg)](https://githyub.com/UniversityofWarwick/statuspage-widget/actions)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d97484f4-6eec-4351-a8b5-bc84332e168d/deploy-status)](https://app.netlify.com/sites/epic-bassi-0cb346/deploys)
 
 [![Deploys by Netlify](https://www.netlify.com/img/global/badges/netlify-light.svg)](https://www.netlify.com)
@@ -13,8 +13,6 @@ then you may wish to just use [@statuspage/status-widget](https://www.npmjs.com/
 In the project directory, you can run:
 
 ### `npm start`
-
-NOTE: Currently broken since the move to Preact, needs looking at.
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

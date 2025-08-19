@@ -5,16 +5,19 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version:
+          - 10
+          - 16
+          - 22
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@master
+        uses: actions/setup-node@5e2628c959b9ade56971c0afcebbe5332d44b398
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install and Test
         run: |
-          yarn
-          yarn test
+          npm
+          npm test
         env:
           CI: true
