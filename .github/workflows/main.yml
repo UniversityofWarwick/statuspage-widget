@@ -6,7 +6,6 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 10
           - 16
           - 22
     steps:
@@ -15,6 +14,7 @@ jobs:
         uses: actions/setup-node@5e2628c959b9ade56971c0afcebbe5332d44b398
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - name: Install and Test
         run: |
           npm ci
