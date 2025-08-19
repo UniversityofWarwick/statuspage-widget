@@ -74,6 +74,8 @@ jestConfig.moduleNameMapper = {
   "^react$": "preact/compat",
   "^react-dom/test-utils$": "preact/test-utils",
   "^react-dom$": "preact/compat",
+  "^react/jsx-runtime": "preact/jsx-runtime",
+  "^react/jsx-dev-runtime": "preact/jsx-runtime",
 };
 
 argv.push(
