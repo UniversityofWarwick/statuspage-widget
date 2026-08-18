@@ -1,6 +1,5 @@
-import React from 'react';
 import { render, waitFor } from '@testing-library/preact';
-import StatusPageEmbed from './StatusPageEmbed.jsx';
+import StatusPageEmbed from './StatusPageEmbed';
 
 test('renders default hidden embed', () => {
   const { getByText } = render(<StatusPageEmbed />);
@@ -20,13 +19,13 @@ test('renders test mode incident', async () => {
 test('close button is tabindex -1 when not visible', () => {
   const renderedElement = render(<StatusPageEmbed />);
   const closeButton = renderedElement.baseElement.querySelector('.StatusPageEmbed__close__button');
-  expect(closeButton).toHaveAttribute("tabindex", "-1");
+  expect(closeButton).toHaveAttribute('tabindex', '-1');
 });
 
-test ('close button is tabindex 0 when visible', async () => {
+test('close button is tabindex 0 when visible', async () => {
   const renderedElement = render(<StatusPageEmbed testMode={true} />);
   await waitFor(() => {
     const closeButton = renderedElement.baseElement.querySelector('.StatusPageEmbed__close__button');
-    expect(closeButton).toHaveAttribute("tabindex", "0");
+    expect(closeButton).toHaveAttribute('tabindex', '0');
   });
 });

@@ -2,7 +2,7 @@
 
 ## Project shape
 
-This is a small Preact widget that mounts into `.statuspage-embed-container` elements from `src/index.js`, renders the UI in `src/StatusPageEmbed.js`, and styles it with `src/StatusPageEmbed.scss`.
+This is a small Preact widget that mounts into `.statuspage-embed-container` elements from `src/index.tsx`, renders the UI in `src/StatusPageEmbed.tsx`, and styles it with `src/StatusPageEmbed.scss`.
 
 The widget polls `GET ${apiBase}/v2/summary.json`, filters incidents by configured component IDs, remembers dismissed incidents in `localStorage` keyed by the API host, and falls back to a safe “all systems operational” state on fetch failure. `testMode` uses a fixture payload in the component itself.
 
@@ -23,7 +23,7 @@ The widget polls `GET ${apiBase}/v2/summary.json`, filters incidents by configur
 - Preserve the existing `initialState`/`previousState` behavior so the widget avoids flashing back to the empty state while refetching.
 - Keep the `localStorage` dismissal key format tied to `new URL(apiBase).hostname`.
 - The component’s visible/hidden state is driven by `status.indicator`, `initialised`, and the previous state; tests already assert the tabindex behavior.
-- `src/index.js` expects `data-*` attributes on each mount point and JSON in `data-components`.
+- `src/index.tsx` expects `data-*` attributes on each mount point and JSON in `data-components`.
 
 ## Repo docs to respect
 

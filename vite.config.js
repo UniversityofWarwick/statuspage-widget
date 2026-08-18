@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => ({
     outDir: mode === 'dist' ? 'dist' : 'build',
     emptyOutDir: true,
     lib: {
-      entry: 'src/index.jsx',
+      entry: 'src/index.tsx',
       name: 'StatusPageEmbed',
       formats: ['iife'],
       fileName: () => 'main.js',
