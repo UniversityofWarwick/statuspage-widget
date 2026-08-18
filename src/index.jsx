@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import StatusPageEmbed from './StatusPageEmbed';
+import StatusPageEmbed from './StatusPageEmbed.jsx';
 
 function init() {
   Array.from(document.querySelectorAll('.statuspage-embed-container')).forEach((element) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/preact';
-import StatusPageEmbed from './StatusPageEmbed';
+import StatusPageEmbed from './StatusPageEmbed.jsx';
 
 test('renders default hidden embed', () => {
   const { getByText } = render(<StatusPageEmbed />);
