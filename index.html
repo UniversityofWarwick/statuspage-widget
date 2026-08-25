@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB" class="no-js"> <!-- class="id7-non-branded" to remove Warwick branding -->
+<html lang="en-GB" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,13 +10,8 @@
   <title>StatusPage embed widget</title>
 
   <link rel="stylesheet" href="https://use.typekit.net/iog2qgq.css" crossorigin="anonymous">
-
-  <!-- ID7 -->
   <link href="https://unpkg.com/@universityofwarwick/id7@3.3.1/dist/css/id7.css" rel="stylesheet" type="text/css" crossorigin="anonymous">
-
-  <!-- Default styling. You will probably want to replace with your own site.css -->
   <link href="https://unpkg.com/@universityofwarwick/id7@3.3.1/dist/css/id7-default-theme.css" rel="stylesheet" type="text/css" crossorigin="anonymous">
-
   <script src="https://unpkg.com/@universityofwarwick/id7@3.3.1/dist/js/id7-bundle.js" type="text/javascript" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -50,11 +45,7 @@
     </header>
 
     <main class="id7-main-content-area" id="main">
-      <header class="id7-main-content-header">
-        <!-- <div class="id7-page-title">
-          <h1>StatusPage embed widget</h1>
-        </div> -->
-      </header>
+      <header class="id7-main-content-header"></header>
 
       <div class="id7-main-content">
         <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -70,25 +61,19 @@
           </a>
         </p>
 
-        <p>You can use the JavaScript and CSS files from this project to embed any current maintenance or incidents
-        from a StatusPage instance. You can restrict this down to specific components if you know their ID.</p>
-
-        <p>The JavaScript file hooks into any HTML element with the class of <code>statuspage-embed-container</code>
-          so it can be loaded asynchronously or placed at the end of the <code>&lt;/body&gt;</code>.</p>
+        <p>You can use the JavaScript and CSS files from this project to embed any current maintenance or incidents from a StatusPage instance. You can restrict this down to specific components if you know their ID.</p>
+        <p>The JavaScript file hooks into any HTML element with the class of <code>statuspage-embed-container</code> so it can be loaded asynchronously or placed at the end of the <code>&lt;/body&gt;</code>.</p>
 
         <h2>Examples</h2>
 
         <p>Full University of Warwick StatusPage embed:</p>
-
-        <pre><code>&lt;div class="statuspage-embed-container" data-api-base="https://status.warwick.ac.uk/api">&lt;/div></code></pre>
+        <pre><code>&lt;div class="statuspage-embed-container" data-api-base="https://status.warwick.ac.uk/api"&gt;&lt;/div&gt;</code></pre>
 
         <p>Restricting to just a few components:</p>
-
         <pre><code>&lt;div class="statuspage-embed-container" data-api-base="https://status.warwick.ac.uk/api"
-   data-components="[&amp;quot;g8s8knp0fqrs&amp;quot;,&amp;quot;lvy1tzdrjqfd&amp;quot;,&amp;quot;nf4ymvwshxj1&amp;quot;]">&lt;/div></code></pre>
+   data-components="[&amp;quot;g8s8knp0fqrs&amp;quot;,&amp;quot;lvy1tzdrjqfd&amp;quot;,&amp;quot;nf4ymvwshxj1&amp;quot;]"&gt;&lt;/div&gt;</code></pre>
 
         <h2>Data attributes</h2>
-
         <ul>
           <li><code>data-api-base</code> - the fully qualified base URI, e.g. <code>https://status.warwick.ac.uk/api</code></li>
           <li><code>data-components</code> - a JSON array of component IDs - see /api/v2/components.json for a list of component IDs</li>
@@ -98,27 +83,16 @@
         </ul>
 
         <h2>Content Security Policy</h2>
-
         <p>The widget will require a <code>connect-src</code> directive for the API base specified.</p>
 
         <h2>Source code and license</h2>
-
-        <p>The widget is <a href="https://github.com/UniversityofWarwick/statuspage-widget/blob/develop/LICENSE">licensed under the ISC license</a>. Source code is available on <a href="https://github.com/UniversityofWarwick/statuspage-widget">GitHub</a>.
+        <p>The widget is <a href="https://github.com/UniversityofWarwick/statuspage-widget/blob/develop/LICENSE">licensed under the ISC license</a>. Source code is available on <a href="https://github.com/UniversityofWarwick/statuspage-widget">GitHub</a>.</p>
       </div>
     </main>
   </div>
   <div class="id7-right-border"></div>
 
   <div class="statuspage-embed-container" data-test-mode="true"></div>
-  <!--
-    This HTML file is a template.
-    If you open it directly in the browser, you will see an empty page.
-
-    You can add webfonts, meta tags, or analytics to this file.
-    The build step will place the bundled scripts into the <body> tag.
-
-    To begin the development, run `npm start` or `yarn start`.
-    To create a production bundle, use `npm run build` or `yarn build`.
-  -->
+  <script type="module" src="/src/index.tsx"></script>
 </body>
 </html>
